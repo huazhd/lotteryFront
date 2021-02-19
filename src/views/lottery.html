@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .bg{
+        font-weight: bold;
+        font-size: 20px;
+        position: center;
+        padding-left: 38%;
+    }
+    .des{
+        color: red;
+        font-size: 10px;
+        padding-left: 5%;
+    }
+    .getData{
+        padding-left: 5%;
+    }
+</style>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+<body>
+<div class="bg" >
+    彩票大数据网站
+    {{msg}}
+</div>
+<div class="des" v-html="template">
+    {{template}}
+    <a href="url">中国福彩网</a>
+</div>
+<div class="getData">
+    当前日期:<div id="nowtime"></div>
+    <button v-on:click="forecasNextLottery()">预测彩票</button>
+</div>
+<div class="hisData">
+
+</div>
+<script>
+    new Vue({
+        el:'.bg',
+        data:{
+            msg:'(欢迎使用彩票分析网站)',
+        }
+    })
+    new Vue({
+        el:'.des',
+        data:{
+            template:"<div>此网站提供N多种算法的彩票预测机制,欢迎提供更多算法完善（源码github地址）</div>",
+            url:"http://www.cwl.gov.cn"
+        }
+    })
+    new Vue({
+        el:'.getData',
+        methods:{
+
+        }
+    })
+    window.onload=function(){
+        //每1秒刷新时间
+        setInterval("NowTime()",1000);
+    }
+    function forecasNextLottery() {
+        document
+            .innerHTML="01,03,16,18,21----05";
+    }
+    function NowTime(){
+        //获取年月日
+        var time=new Date();
+        var year=time.getFullYear();
+        var month=time.getMonth();
+        var day=time.getDate();
+
+        //获取时分秒
+        var h=time.getHours();
+        var m=time.getMinutes();
+        var s=time.getSeconds();
+
+        //检查是否小于10
+        h=check(h);
+        m=check(m);
+        s=check(s);
+        document.getElementById("nowtime")
+            .innerHTML=year+'年'+month+'月'+day+'日'+h+" : "+m+" : "+s;
+    }
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+    }
+</script>
+</body>
+</html>
